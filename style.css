@@ -1,0 +1,288 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #ECCACB, #7b1e3c);
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* рамка */
+.frame {
+  width: 420px;
+  margin: 20px auto;
+  background: black;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* сцена */
+.scene {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  background: #87ceeb;
+  transition: 1s;
+}
+
+/* ☀️ орбіта */
+.orbit {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  left: 50%;
+  bottom: -150px;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: center;
+  transition: 1s;
+}
+
+/* сонце */
+.sun {
+  width: 50px;
+  height: 50px;
+  background: #ffe066;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ☁️ хмари */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: white;
+  border-radius: 70%;
+}
+
+/* хмара 1 */
+.cloud1 {
+  width: 90px;
+  height: 30px;
+  top: 40px;
+  left: 140px;
+  animation: floatCloud1 6s ease-in-out infinite;
+}
+
+.cloud1::before {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: 10px;
+}
+
+.cloud1::after {
+  width: 50px;
+  height: 50px;
+  top: -25px;
+  right: 10px;
+}
+
+/* хмара 2 */
+.cloud2 {
+  width: 70px;
+  height: 25px;
+  top: 130px;
+  right: 30px;
+  animation: floatCloud2 8s ease-in-out infinite;
+}
+
+.cloud2::before {
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  left: 10px;
+}
+
+.cloud2::after {
+  width: 35px;
+  height: 35px;
+  top: -18px;
+  right: 5px;
+}
+
+/* анімація хмар */
+@keyframes floatCloud1 {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+
+@keyframes floatCloud2 {
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(-15px); }
+}
+
+/* 🏙️ місто */
+.city {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: #121212;
+  clip-path: polygon(
+    0% 100%, 0% 60%, 10% 60%, 10% 40%, 20% 40%, 20% 70%,
+    30% 70%, 30% 50%, 40% 50%, 40% 80%,
+    50% 80%, 50% 30%, 60% 30%, 60% 60%,
+    70% 60%, 70% 45%, 80% 45%, 80% 75%,
+    90% 75%, 90% 55%, 100% 55%, 100% 100%
+  );
+}
+
+/* світло вікон */
+.city::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0),
+    linear-gradient(#ffd84d 0 0);
+
+  background-size:
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    8px 10px,
+    9px 8px;
+
+  background-repeat: no-repeat;
+
+  background-position:
+    20px 70px,
+    60px 50px,
+    90px 90px,
+    130px 60px,
+    150px 80px,
+    190px 45px,
+    220px 70px,
+    240px 35px,
+    300px 65px,
+    345px 85px;
+
+  opacity: 0;
+  transition: 1s;
+}
+/* ✨ зірки */
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 70% 20%, white, transparent),
+    radial-gradient(2px 2px at 50% 50%, white, transparent);
+
+  opacity: 0;
+  transition: 1s;
+}
+
+/* анімація зірок */
+@keyframes blink {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* 🌙 місяць */
+.moon {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 30px;
+  left: 40px;
+  border-radius: 50%;
+  box-shadow: -10px 0 0 5px #d0ff00;
+  opacity: 0;
+  transition: 1s;
+}
+
+/* ховаємо radio */
+input {
+  display: none;
+}
+
+/* 🌅 ранок */
+#dusk:checked ~ .frame .scene {
+  background: linear-gradient(#fbc2eb, #fad0c4);
+}
+#dusk:checked ~ .frame .orbit {
+  transform: translateX(-50%) rotate(-60deg);
+}
+
+/* ☀️ день */
+#day:checked ~ .frame .orbit {
+  transform: translateX(-50%) rotate(0deg);
+}
+
+/* 🌇 захід */
+#sunset:checked ~ .frame .scene {
+  background: linear-gradient(#eb595e, #ffa0e1);
+}
+#sunset:checked ~ .frame .orbit {
+  transform: translateX(-50%) rotate(60deg);
+}
+
+/* 🌙 ніч */
+#night:checked ~ .frame .scene {
+  background: #091a5e;
+}
+
+/* нічні ефекти */
+#night:checked ~ .frame .moon {
+  opacity: 1;
+}
+
+#night:checked ~ .frame .stars {
+  opacity: 1;
+  animation: blink 2s infinite;
+}
+
+#night:checked ~ .frame .city::after {
+  opacity: 1;
+}
+
+#night:checked ~ .frame .orbit {
+  opacity: 0;
+  transform: translateX(-50%) rotate(120deg) scale(0.5);
+}
+
+/* кнопки */
+.buttons label {
+  padding: 10px 20px;
+  background: #ffffff33;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+  display: inline-block;
+}
+
+.buttons label:hover {
+  background: #ffffff66;
+}
