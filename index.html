@@ -1,49 +1,841 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>Time of Day</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily News</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    color: #333;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.top-bar {
+    background: #252b35;
+    color: #fff;
+    padding: 7px 0;
+    font-size: 10px;
+}
+
+.top-bar i {
+    margin-left: 9px;
+}
+
+.header {
+    background: #fff;
+    padding: 14px 0;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #292d34;
+}
+
+.ad-banner {
+    height: 55px;
+    background: #f0f1f3;
+    border: 1px solid #e5e6e9;
+    color: #777;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+}
+
+.navbar {
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 0;
+}
+
+.navbar .nav-link {
+    color: #30343b;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 13px 9px;
+}
+
+.navbar .nav-link:hover {
+    color: #e83e50;
+}
+
+.search-form input {
+    width: 125px;
+    font-size: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+.search-form button {
+    background: #fff;
+    border: 1px solid #e83e50;
+    color: #e83e50;
+    font-size: 10px;
+    padding: 5px 9px;
+}
+
+main {
+    padding-top: 17px;
+    padding-bottom: 20px;
+}
+
+.featured,
+.section-box,
+.side-box {
+    background: #fff;
+    border: 1px solid #e9eaed;
+    border-radius: 4px;
+    margin-bottom: 14px;
+}
+
+.featured {
+    overflow: hidden;
+}
+
+.featured img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.featured-content {
+    padding: 12px;
+}
+
+.category {
+    display: block;
+    color: #e83e50;
+    font-size: 9px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.featured h1 {
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 1.3;
+    margin-bottom: 7px;
+}
+
+.description {
+    color: #777;
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.meta {
+    color: #999;
+    font-size: 9px;
+    margin-top: 9px;
+}
+
+.section-title {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #30343b;
+}
+
+.news-card {
+    background: #fff;
+    border: 1px solid #e9eaed;
+    border-radius: 3px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.news-card img {
+    width: 100%;
+    height: 105px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 9px;
+}
+
+.card-content h3 {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.card-content .description {
+    font-size: 9px;
+}
+
+.side-box {
+    padding: 12px;
+}
+
+.side-title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.popular-link {
+    display: block;
+    color: #2877c7;
+    font-size: 10px;
+    margin-bottom: 9px;
+    line-height: 1.4;
+}
+
+.popular-link:hover {
+    color: #e83e50;
+}
+
+.ad-square {
+    height: 135px;
+    background: #f0f1f3;
+    border: 1px solid #e5e6e9;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 14px;
+    font-size: 10px;
+}
+
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list li {
+    padding: 7px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+}
+
+.category-list li:last-child {
+    border-bottom: none;
+}
+
+.category-list a:hover {
+    color: #e83e50;
+}
+
+.count {
+    color: #999;
+}
+
+.must-card {
+    display: flex;
+    background: #fff;
+    border: 1px solid #e9eaed;
+    border-radius: 3px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.must-card img {
+    width: 36%;
+    min-height: 95px;
+    object-fit: cover;
+}
+
+.must-content {
+    padding: 9px;
+    flex: 1;
+}
+
+.must-content h3 {
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.popular-card {
+    background: #fff;
+    border: 1px solid #e9eaed;
+    border-radius: 3px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.popular-card img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.popular-card .card-content {
+    padding: 8px;
+}
+
+.popular-card h3 {
+    font-size: 10px;
+    line-height: 1.4;
+    font-weight: bold;
+}
+
+.footer {
+    background: #292f38;
+    color: #d2d4d8;
+    padding: 25px 0 12px;
+    font-size: 10px;
+}
+
+.footer h3 {
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.footer p {
+    line-height: 1.7;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer li {
+    margin-bottom: 7px;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+.newsletter input {
+    width: 100%;
+    border: none;
+    padding: 7px;
+    margin-bottom: 6px;
+    font-size: 10px;
+}
+
+.newsletter button {
+    background: #2877c7;
+    color: #fff;
+    border: none;
+    padding: 7px 12px;
+    font-size: 10px;
+}
+
+.footer-bottom {
+    border-top: 1px solid #414650;
+    margin-top: 18px;
+    padding-top: 12px;
+    text-align: center;
+    color: #999;
+    font-size: 9px;
+}
+
+@media (max-width: 767px) {
+    .header {
+        padding: 12px 0;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .navbar .nav-link {
+        padding: 10px;
+    }
+
+    .search-form {
+        padding: 0 10px 10px;
+    }
+
+    .search-form input {
+        flex: 1;
+        width: auto;
+    }
+
+    .featured img {
+        height: 220px;
+    }
+
+    .featured h1 {
+        font-size: 17px;
+    }
+
+    .news-card img {
+        height: 130px;
+    }
+
+    .must-card img {
+        min-height: 100px;
+    }
+
+    .popular-card img {
+        height: 125px;
+    }
+
+    .footer .row > div {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    .featured img {
+        height: 175px;
+    }
+
+    .news-card img {
+        height: 100px;
+    }
+
+    .popular-card img {
+        height: 95px;
+    }
+
+    .card-content {
+        padding: 6px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-<input type="radio" name="time" id="dusk" checked>
-<input type="radio" name="time" id="day">
-<input type="radio" name="time" id="sunset">
-<input type="radio" name="time" id="night">
+<div class="top-bar d-none d-md-block">
+    <div class="container d-flex justify-content-between">
+        <div>
+            <i class="far fa-calendar-alt"></i>
+            <span id="date"></span>
+            <span class="ms-2">18°C · Вінниця</span>
+        </div>
+        <div>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </div>
+</div>
 
-<div class="frame">
-  <div class="scene">
+<header class="header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-4">
+                <a href="#" class="logo">Daily News</a>
+            </div>
+            <div class="col-md-8 d-none d-md-block">
+                <div class="ad-banner">
+                    Advertisement Banner<br>728 × 90
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-    <div class="orbit">
-      <div class="sun"></div>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <button class="navbar-toggler my-2" type="button"
+            data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#world">World</a></li>
+                <li class="nav-item"><a class="nav-link" href="#politics">Politics</a></li>
+                <li class="nav-item"><a class="nav-link" href="#business">Business</a></li>
+                <li class="nav-item"><a class="nav-link" href="#technology">Technology</a></li>
+                <li class="nav-item"><a class="nav-link" href="#sports">Sports</a></li>
+                <li class="nav-item"><a class="nav-link" href="#culture">Culture</a></li>
+            </ul>
+
+            <form class="search-form d-flex" id="searchForm">
+                <input type="search" id="searchInput" placeholder="Search..." aria-label="Search">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+
+    <div class="row g-3">
+
+        <div class="col-12 col-lg-8">
+
+            <article class="featured">
+                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80"
+                    alt="Штучний інтелект і цифрові технології">
+
+                <div class="featured-content">
+                    <span class="category">Technology</span>
+                    <h1>The Future of Artificial Intelligence: New Horizons</h1>
+                    <p class="description">
+                        Explore a world where artificial intelligence and innovation
+                        transform various aspects of our lives, from machine learning
+                        to robotics. Discover opportunities for a technology-driven future.
+                    </p>
+                    <div class="meta">
+                        <i class="far fa-clock"></i>
+                        October 4, 2026
+                        <span class="ms-2">5 min read</span>
+                    </div>
+                </div>
+            </article>
+
+            <section class="mb-3">
+                <h2 class="section-title">Latest News</h2>
+
+                <div class="row g-3">
+
+                    <div class="col-6">
+                        <article class="news-card">
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80"
+                                alt="Фінансові графіки">
+                            <div class="card-content">
+                                <span class="category" id="business">Business</span>
+                                <h3><a href="#business">Global Markets: Forecasts for the Next Quarter</a></h3>
+                                <p class="description">
+                                    Explore the latest market trends and financial updates.
+                                </p>
+                                <div class="meta">2 hours ago</div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-6">
+                        <article class="news-card">
+                            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80"
+                                alt="Записи та планування">
+                            <div class="card-content">
+                                <span class="category">Education</span>
+                                <h3><a href="#education">Leaders' Summit: Key Decisions and Perspectives</a></h3>
+                                <p class="description">
+                                    Important ideas and decisions from recent discussions.
+                                </p>
+                                <div class="meta">3 hours ago</div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-6">
+                        <article class="news-card">
+                            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"
+                                alt="Міський пейзаж">
+                            <div class="card-content">
+                                <span class="category" id="culture">Culture</span>
+                                <h3><a href="#culture">New Exhibition: Renaissance Art and Its Significance</a></h3>
+                                <p class="description">
+                                    Discover the art and stories behind a new exhibition.
+                                </p>
+                                <div class="meta">5 hours ago</div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-6">
+                        <article class="news-card">
+                            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=600&q=80"
+                                alt="Спортивна подія">
+                            <div class="card-content">
+                                <span class="category" id="sports">Sports</span>
+                                <h3><a href="#sports">World Championship: Unexpected Results</a></h3>
+                                <p class="description">
+                                    Highlights and memorable moments from the competition.
+                                </p>
+                                <div class="meta">6 hours ago</div>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <aside class="col-12 col-lg-4">
+
+            <section class="side-box">
+                <h2 class="side-title">Popular Posts</h2>
+                <a class="popular-link" href="#technology">The Future of Artificial Intelligence</a>
+                <a class="popular-link" href="#business">Top 10 Investment Strategies for 2026</a>
+                <a class="popular-link" href="#technology">Emerging Technologies Transforming Industries</a>
+                <a class="popular-link" href="#world">Major Developments in Global Markets</a>
+                <a class="popular-link" href="#culture">The Impact of Social Media on Youth</a>
+            </section>
+
+            <div class="ad-square">
+                Advertisement<br>300 × 250
+            </div>
+
+            <section class="side-box">
+                <h2 class="side-title">Categories</h2>
+                <ul class="category-list">
+                    <li><a href="#technology">Technology</a><span class="count">(12)</span></li>
+                    <li><a href="#business">Business</a><span class="count">(18)</span></li>
+                    <li><a href="#world">World</a><span class="count">(25)</span></li>
+                    <li><a href="#sports">Sports</a><span class="count">(10)</span></li>
+                    <li><a href="#culture">Culture</a><span class="count">(8)</span></li>
+                </ul>
+            </section>
+
+        </aside>
     </div>
 
-    <div class="moon"></div>
-    <div class="stars"></div>
+    <section class="mb-3">
+        <h2 class="section-title text-center">Must Read</h2>
 
-    <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
+        <div class="row g-3">
 
-    <div class="city"></div>
-   <div class="cat">
-  <div class="eyes">
-    <span></span>
-    <span></span>
-  </div>
-  <div class="tail"></div>
-  <div class="paws"></div>
-</div>
+            <div class="col-12 col-md-6">
+                <article class="must-card">
+                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=400&q=80"
+                        alt="Природа">
+                    <div class="must-content">
+                        <span class="category">Environment</span>
+                        <h3><a href="#environment">Innovations That Will Change the World in 2026</a></h3>
+                        <p class="description">Discover ideas that may shape our future.</p>
+                        <div class="meta">5 min read</div>
+                    </div>
+                </article>
+            </div>
 
-  </div>
-</div>
+            <div class="col-12 col-md-6">
+                <article class="must-card">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=400&q=80"
+                        alt="Подорож">
+                    <div class="must-content">
+                        <span class="category">Travel</span>
+                        <h3><a href="#travel">Healthy Lifestyle: New Research</a></h3>
+                        <p class="description">New ideas for a balanced daily routine.</p>
+                        <div class="meta">4 min read</div>
+                    </div>
+                </article>
+            </div>
 
-<div class="buttons">
-  <label for="dusk">Ранок</label>
-  <label for="day">День</label>
-  <label for="sunset">Захід сонця</label>
-  <label for="night">Ніч</label>
-</div>
+            <div class="col-12 col-md-6">
+                <article class="must-card">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=400&q=80"
+                        alt="Навчання онлайн">
+                    <div class="must-content">
+                        <span class="category">Education</span>
+                        <h3><a href="#education">The Future of Education: Online Learning and New Platforms</a></h3>
+                        <p class="description">How digital learning opens new opportunities.</p>
+                        <div class="meta">6 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <article class="must-card">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=400&q=80"
+                        alt="Сучасний робочий простір">
+                    <div class="must-content">
+                        <span class="category">Science</span>
+                        <h3><a href="#science">Environmental Challenges: Solutions for Tomorrow</a></h3>
+                        <p class="description">New approaches to global environmental issues.</p>
+                        <div class="meta">3 min read</div>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="mb-3">
+        <h2 class="section-title text-center">Popular News</h2>
+
+        <div class="row row-cols-2 row-cols-md-4 g-3">
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=500&q=80" alt="Подорож">
+                    <div class="card-content">
+                        <span class="category">Travel</span>
+                        <h3><a href="#travel">Top 10 Destinations for Summer Vacation</a></h3>
+                        <div class="meta">3 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=500&q=80" alt="Музика">
+                    <div class="card-content">
+                        <span class="category">Music</span>
+                        <h3><a href="#music">Album of the Year: Reviews and Impressions</a></h3>
+                        <div class="meta">4 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=500&q=80" alt="Відеоігри">
+                    <div class="card-content">
+                        <span class="category">Gadgets</span>
+                        <h3><a href="#gadgets">New Smartphones Review: What to Choose?</a></h3>
+                        <div class="meta">5 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80" alt="Технології">
+                    <div class="card-content">
+                        <span class="category">Science</span>
+                        <h3><a href="#science">Discoveries in Physics: Quantum Technologies</a></h3>
+                        <div class="meta">6 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80" alt="Планета Земля">
+                    <div class="card-content">
+                        <span class="category">Space</span>
+                        <h3><a href="#space">Mars Rover Finds New Evidence of Water</a></h3>
+                        <div class="meta">4 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80" alt="Здорова їжа">
+                    <div class="card-content">
+                        <span class="category">Food</span>
+                        <h3><a href="#food">The Rise of Plant-Based Diets: A Global Trend</a></h3>
+                        <div class="meta">5 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80" alt="Робота за комп'ютером">
+                    <div class="card-content">
+                        <span class="category">Technology</span>
+                        <h3><a href="#technology">Modern Art Movement: New Exhibitions</a></h3>
+                        <div class="meta">3 min read</div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col">
+                <article class="popular-card">
+                    <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=500&q=80" alt="Фінанси">
+                    <div class="card-content">
+                        <span class="category">Finance</span>
+                        <h3><a href="#finance">Cryptocurrency Market: Volatility and Opportunities</a></h3>
+                        <div class="meta">7 min read</div>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="col-12 col-md-4">
+                <h3>About Us</h3>
+                <p>
+                    Daily News brings you the latest stories from around the world.
+                    Stay informed about technology, business, culture and more.
+                </p>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Use</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#sitemap">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <h3>Subscribe to our Newsletter</h3>
+                <p>Get the latest news delivered to your inbox.</p>
+                <form class="newsletter" id="newsletterForm">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <div id="message" class="mt-2"></div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Daily News. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById("date").textContent =
+    new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+    });
+
+document.getElementById("searchForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const query = document.getElementById("searchInput").value.trim().toLowerCase();
+    const articles = document.querySelectorAll("main article");
+    let found = false;
+
+    articles.forEach(function(article) {
+        if (!found && query && article.textContent.toLowerCase().includes(query)) {
+            article.scrollIntoView({ behavior: "smooth", block: "center" });
+            found = true;
+        }
+    });
+
+    if (query && !found) {
+        alert("No news found.");
+    }
+});
+
+document.getElementById("newsletterForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    document.getElementById("message").textContent = "Thank you for subscribing!";
+    this.reset();
+});
+</script>
 
 </body>
 </html>
